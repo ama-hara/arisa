@@ -1,4 +1,4 @@
-# Arisa Engine
+# Arisa Download Engine
 
 > "...才不是特意帮你的"
 
@@ -58,6 +58,10 @@
 - **三语 CLI** — 支持中文 / 日文 / 英文（实验性）
 
 ## 快速开始
+
+
+    我操，忘了写了  
+
 
 ### 系统要求
 
@@ -239,3 +243,5 @@ arisa/
 项目以 BanG Dream! 中 Poppin'Party 的键盘手 **市ヶ谷有咲** (Ichigaya Arisa) 命名。
 
 > "才、才没有喜欢你！"
+
+## 本项目的大部分代码为 Xiaomi MiMo-V2.5-Pro AI生成
