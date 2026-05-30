@@ -41,6 +41,9 @@ public:
     auto get_status(TaskId id) const -> TaskStatus;
     auto get_task(TaskId id) -> TaskInfo*;
     auto task_count() const -> std::size_t;
+    auto get_tasks_by_status(TaskStatus status) const -> std::vector<TaskId>;
+    auto get_all_tasks() const -> std::vector<TaskId>;
+    auto has_task(TaskId id) const -> bool;
 
     void set_progress_callback(ProgressCallback cb);
 

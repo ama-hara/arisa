@@ -1,4 +1,4 @@
-#include "arisa/core/scheduler.h"
+ï»¿#include "arisa/core/scheduler.h"
 #include "arisa/core/config.h"
 #include "arisa/core/resume_manager.h"
 #include "arisa/net/http_client.h"
@@ -118,7 +118,7 @@ void Scheduler::worker(TaskId id) {
         std::println("[Scheduler] Task {} probe failed, single connection", id);
 
     if (!use_multi) {
-        // ©¤©¤ Single connection ©¤©¤
+        // â”€â”€ Single connection â”€â”€
         int attempt = 0, max_tries = max_retries_ + 1;
         Result<FileOffset> result = std::unexpected(make_error(ErrorCode::Unknown, ""));
 
@@ -163,7 +163,7 @@ void Scheduler::worker(TaskId id) {
         }
 
     } else {
-        // ©¤©¤ Multi-segment + resume ©¤©¤
+        // â”€â”€ Multi-segment + resume â”€â”€
         FileOffset file_size = info->size;
         task->total_size.store(file_size);
 
@@ -319,4 +319,29 @@ void Scheduler::worker(TaskId id) {
     { std::lock_guard lock(mutex_); try_start_tasks(); }
 }
 
+
+
+auto Scheduler::get_tasks_by_status(TaskStatus status) const -> std::vector<TaskId> {
+    std::lock_guard lock(mutex_);
+    std::vector<TaskId> ids;
+    for (auto& t : tasks_) {
+        if (t->status.load() == status) ids.push_back(t->id);
+    }
+    return ids;
+}
+
+auto Scheduler::get_all_tasks() const -> std::vector<TaskId> {
+    std::lock_guard lock(mutex_);
+    std::vector<TaskId> ids;
+    for (auto& t : tasks_) ids.push_back(t->id);
+    return ids;
+}
+
+auto Scheduler::has_task(TaskId id) const -> bool {
+    std::lock_guard lock(mutex_);
+    for (auto& t : tasks_) {
+        if (t->id == id) return true;
+    }
+    return false;
+}
 } // namespace arisa
