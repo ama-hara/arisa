@@ -171,7 +171,6 @@ void Scheduler::worker(TaskId id) {
         auto plan = net::plan_chunks(file_size, opts.max_connections);
         int num_chunks = plan.num_chunks;
 
-            num_chunks--;
 
         auto existing = ControlFile::load(ctrl_path);
         bool resuming = false;
