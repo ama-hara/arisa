@@ -1,19 +1,37 @@
-﻿/build/
+﻿# Build
+/build/
 /out/
-.vs/
-*.user
-*.suo
 *.exe
+*.dll
+*.lib
 *.obj
 *.pdb
 *.ilk
 *.log
 *.iobj
 *.ipdb
-/downloads/
-*.zip
-*.pdf
-*.arisa
+
+# IDE
+.vs/
+*.user
+*.suo
+*.vcxproj*
+*.sln
+
+# CMake
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
+compile_commands.json
+
+# Download artifacts
+/downloads/
+*.arisa
+
+# Test artifacts
+test.txt
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

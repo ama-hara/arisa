@@ -28,13 +28,31 @@ Resume: re-run same command to continue interrupted downloads.
 }
 
 auto main(int argc, char* argv[]) -> int {
-    std::println(R"(
-    +===================================+
-    |      Arisa Engine (ars)           |
-    |        v0.7.0-alpha               |
-    |   "...才不是特意帮你的"            |
-    +===================================+
-    )");
+    std::string ver = "v";
+    ver += config::version;
+    std::string title = "Arisa Engine (ars)";
+    constexpr int W = 35;
+    auto pad = [](const std::string& s) -> std::string {
+        int w = 0;
+        for (std::size_t i = 0; i < s.size();) {
+            unsigned char c = static_cast<unsigned char>(s[i]);
+            if (c < 0x80) { w += 1; i += 1; }
+            else if (c >= 0xE0) { w += 2; i += 3; }
+            else if (c >= 0xC0) { w += 2; i += 2; }
+            else { w += 1; i += 1; }
+        }
+        int spaces = W - w;
+        if (spaces < 0) spaces = 0;
+        return s + std::string(spaces, ' ');
+    };
+    std::string border(W + 2, '=');
+    std::println("");
+    std::println("    +{}+", border);
+    std::println("    | {}|", pad(title));
+    std::println("    | {}|", pad(ver));
+    std::println("    | {}|", pad("\"...才不是特意帮你的\""));
+    std::println("    +{}+", border);
+    std::println("");
 
     if (argc < 2) { print_usage(); return 1; }
 
