@@ -1,5 +1,28 @@
 ﻿# Changelog
 
+## [1.0.0] - 2026-05-31
+
+First stable release.
+
+### Features
+- Multi-segment download engine (IOCP + WinHTTP, up to 16 connections)
+- Smart chunk strategy: BDP-aware adaptive chunking
+- HTTP/2 support (Windows 10 1607+)
+- Connection pool: reuse connections for same-host batch downloads
+- Resume from .arisa control file
+- Auto retry with exponential backoff
+- HEAD probe: auto-detect file size and Range support
+- CLI: rs <url> -o -n -c --rpc-port
+- Full aria2 JSON-RPC 2.0 compatibility (29 methods)
+- Motrix GUI verified as aria2 replacement
+- Zero external dependencies (clean-room implementation)
+
+### Known Limitations
+- Windows only (Linux/macOS planned)
+- No BitTorrent / Metalink support
+- No speed limiter
+- No proxy authentication
+
 All notable changes to Arisa Engine will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
