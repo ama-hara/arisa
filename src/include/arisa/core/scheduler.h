@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "arisa/core/types.h"
+#include "arisa/net/connection_pool.h"
+#include "arisa/net/connection_pool.h"
 #include <vector>
 #include <mutex>
 #include <thread>
@@ -54,7 +56,8 @@ private:
     int                                     max_concurrent_;
     int                                     max_retries_;
     std::atomic<bool>                       shutdown_flag_{false};
-    ProgressCallback                        progress_cb_;
+    net::ConnectionPool          pool_;
+ProgressCallback                        progress_cb_;
 
     auto running_count() -> int;
     void try_start_tasks();

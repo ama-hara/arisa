@@ -12,6 +12,10 @@ set(ARISA_SOURCES
     src/io/iocp_engine.cpp
     src/net/http_client.cpp
     src/rpc/rpc_server.cpp
+    src/net/connection_pool.cpp
+    src/net/connection_pool.cpp
+    src/net/connection_pool.cpp
+    src/net/connection_pool.cpp
 )
 
 add_executable(ars ${ARISA_SOURCES})

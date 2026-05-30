@@ -31,7 +31,7 @@ auto main(int argc, char* argv[]) -> int {
     std::println(R"(
     +===================================+
     |      Arisa Engine (ars)           |
-    |        v0.6.0-alpha               |
+    |        v0.7.0-alpha               |
     |   "...才不是特意帮你的"            |
     +===================================+
     )");

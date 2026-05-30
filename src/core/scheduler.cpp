@@ -1,5 +1,7 @@
 ﻿#include "arisa/core/scheduler.h"
 #include "arisa/core/config.h"
+#include "arisa/net/chunk_strategy.h"
+#include "arisa/net/chunk_strategy.h"
 #include "arisa/core/resume_manager.h"
 #include "arisa/net/http_client.h"
 #include <print>
@@ -166,9 +168,9 @@ void Scheduler::worker(TaskId id) {
         // ── Multi-segment + resume ──
         FileOffset file_size = info->size;
         task->total_size.store(file_size);
+        auto plan = net::plan_chunks(file_size, opts.max_connections);
+        int num_chunks = plan.num_chunks;
 
-        int num_chunks = std::min(opts.max_connections, config::max_chunks);
-        while (num_chunks > 1 && file_size / num_chunks < config::min_chunk_size)
             num_chunks--;
 
         auto existing = ControlFile::load(ctrl_path);
@@ -202,7 +204,7 @@ void Scheduler::worker(TaskId id) {
         };
 
         std::vector<std::unique_ptr<ChunkState>> chunks;
-        FileOffset chunk_size = file_size / num_chunks;
+        FileOffset chunk_size = plan.piece_size;
         for (int i = 0; i < num_chunks; ++i) {
             auto c = std::make_unique<ChunkState>();
             c->start = static_cast<FileOffset>(i) * chunk_size;

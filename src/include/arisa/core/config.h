@@ -29,7 +29,7 @@ inline constexpr int    control_file_save_interval = 20;       // 每 20 次 tic
 inline constexpr int    progress_interval_ms    = 100;
 
 // ── 版本 ──
-inline constexpr const char* version            = "0.6.0-alpha";
+inline constexpr const char* version            = "0.7.0-alpha";
 inline constexpr const char* user_agent         = "Arisa/0.4";
 
 } // namespace arisa::config
